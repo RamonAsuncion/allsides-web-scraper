@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
-source = requests.get('https://ramonasuncion.me/')
+url = 'https://ramonasuncion.me/'
+
+source = requests.get(url)
 
 
 def saveSource(html, path):
