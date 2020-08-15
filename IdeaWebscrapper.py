@@ -10,3 +10,11 @@ def saveSource(html, path):
 
 
 saveSource(r.content, 'ramonasuncion_me')
+
+
+def readSource(html, path):
+    with open(path, 'rb') as f:
+        return f.read()
+
+
+html = readSource('ramonasuncion_me')
