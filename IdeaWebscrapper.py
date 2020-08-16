@@ -1,22 +1,26 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = 'https://ramonasuncion.me/'
+url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 
 source = requests.get(url)
 
+soup = BeautifulSoup(source, 'lxml')
 
-def saveSource(html, path):
-    with open(path, 'wb') as f:
-        f.write(html)
-
-
-saveSource(r.content, 'ramonasuncion_me')
+print(source.content[:50])  # first 50 characters of the source code
 
 
-def readSource(html, path):
-    with open(path, 'rb') as f:
-        return f.read()
+# def saveSource(html, path):
+#     with open(path, 'wb') as f:
+#         f.write(html)
 
 
-html = readSource('ramonasuncion_me')
+# saveSource()
+
+
+# def readSource(html, path):
+#     with open(path, 'rb') as f:
+#         return f.read()
+
+
+# html = readSource()
