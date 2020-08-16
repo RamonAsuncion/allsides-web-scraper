@@ -1,24 +1,32 @@
 from bs4 import BeautifulSoup
 import requests
 
+# url to the website url
 url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 
+# get the source code
 source = requests.get(url)
 
+#
 soup = BeautifulSoup(source.content, 'lxml')
 
+# first 50 characters of the source code to test
+print(source.content[:50])
 
-print(source.content[:50])  # first 50 characters of the source code to test
+fullTable = soup.select('tbody tr')
 
-rows = soup.select('tbody tr')
+row = fullTable[0]
 
-row = rows[0]
+newsName = row.select_one('.source-title').text.strip()
 
+# prints out the news source name
+print(newsName)
 
 linkToNewsInfo = row.select_one('.source-title a')['href']
 linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 
-print(websitePage)
+# prints out the link to the news source information section
+print(linkToNewsInfo)
 
 # def saveSource(html, path):
 #     with open(path, 'wb') as f:
