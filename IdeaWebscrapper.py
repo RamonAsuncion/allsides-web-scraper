@@ -25,6 +25,7 @@ newsName = row.select_one('.source-title').text.strip()
 print(newsName)
 
 linkToNewsInfo = row.select_one('.source-title a')['href']
+
 linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 
 # prints out the link to the news source information section
@@ -32,21 +33,8 @@ print(linkToNewsInfo)
 
 
 biasCheck = row.select_one('.views-field-field-bias-image a')['href']
-biasCheck = biasCheck.split('/')[-1]
+
+biasCheck = biasCheck.split('/')[-1]  # try to understand why its -1
+
+
 print(biasCheck)
-
-
-# def saveSource(html, path):
-#     with open(path, 'wb') as f:
-#         f.write(html)
-
-
-# saveSource()
-
-
-# def readSource(html, path):
-#     with open(path, 'rb') as f:
-#         return f.read()
-
-
-# html = readSource()
