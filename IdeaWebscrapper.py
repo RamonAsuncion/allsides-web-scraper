@@ -15,8 +15,10 @@ print(source.content[:50])
 
 fullTable = soup.select('tbody tr')
 
+# selects the first row s
 row = fullTable[0]
 
+# selects the news name of the row its targeting
 newsName = row.select_one('.source-title').text.strip()
 
 # prints out the news source name
