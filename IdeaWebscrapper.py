@@ -30,6 +30,12 @@ linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 # prints out the link to the news source information section
 print(linkToNewsInfo)
 
+
+biasCheck = row.select_one('.views-field-field-bias-image a')['href']
+biasCheck = biasCheck.split('/')[-1]
+print(biasCheck)
+
+
 # def saveSource(html, path):
 #     with open(path, 'wb') as f:
 #         f.write(html)
