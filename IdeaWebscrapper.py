@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-# url to the website url
+# url of the website url
 url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 
 # get the source code
@@ -40,9 +40,11 @@ biasCheck = biasCheck.split('/')[-1]
 # prints out if the source is left, left-center, right, right center, center...
 print(biasCheck)
 
-# communityFeedback = row.select_one('').text
+# this is rendered with javascript
+communityFeedback =
 
-# print("Majority of the community: " + communityFeedback)
+print("Majority of the community: " + communityFeedback)
+
 
 # selects the value for how many agree that their political side is correct
 agreeRating = row.select_one('.agree').text
