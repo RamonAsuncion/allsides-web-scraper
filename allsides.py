@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
+# imports the functions from the py file to this one
+from communityFeedback import *
+
 # url of the website url
 url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 
