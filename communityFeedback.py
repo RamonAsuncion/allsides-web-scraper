@@ -1,6 +1,7 @@
 # js file https://www.allsides.com/sites/default/files/js/js_RkhuUtuGis_wrzoAtkhY74JegSNy1LhoCkjSMXavCTI.js
 
 def communityVote(ratio):
+    # the value of the ratio goes through this if statement and prints out the return string
     if ratio > 3:
         return "absolutely agrees"
 
