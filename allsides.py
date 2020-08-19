@@ -14,7 +14,7 @@ source = requests.get(url)
 soup = BeautifulSoup(source.content, 'lxml')
 
 # first 50 characters of the source code to test
-print(source.content[:50])
+# print(source.content[:50])
 
 # Contains News source name, community feedback, link to news source, and bias data.
 table = soup.select('tbody tr')
@@ -26,14 +26,14 @@ row = table[0]
 newsName = row.select_one('.source-title').text.strip()
 
 # prints out the news source name
-print(newsName)
+# print(newsName)
 
 linkToNewsInfo = row.select_one('.source-title a')['href']
 
 linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 
 # prints out the link to the news source information section
-print(linkToNewsInfo)
+# print(linkToNewsInfo)
 
 biasCheck = row.select_one('.views-field-field-bias-image a')['href']
 
@@ -41,7 +41,7 @@ biasCheck = row.select_one('.views-field-field-bias-image a')['href']
 biasCheck = biasCheck.split('/')[-1]
 
 # prints out if the source is left, left-center, right, right center, center...
-print(biasCheck)
+# print(biasCheck)
 
 # selects the value for how many agree that their political side is correct
 agreeRating = row.select_one('.agree').text
@@ -58,24 +58,29 @@ disagreeRating = int(disagreeRating)
 # finds the ratio by dividing both of them by eachother
 ratio = agreeRating / disagreeRating
 
-# the "somewhat agrees string" was rendered with javascript
-print("Majority of the community: " + communityVote(ratio))
-
 # prints out the rating in print f format
-print(
-    f'Agree: {agreeRating:} Disagree: {disagreeRating:} Ratio (Agree/Disagree): {ratio:.3f}')
+# print(
+#     f'Agree: {agreeRating:} Disagree: {disagreeRating:} Ratio (Agree/Disagree): {ratio:.3f}')
+
+# the "somewhat agrees string" was rendered with javascript
+# print("Majority of the community: " + communityVote(ratio))
 
 fullTable = []
 
 for row in table:
 
-    newsName = row.select_one('.source-title').text.strip()
-    linkToNewsInfo = row.select_one('.source-title a')['href']
-    linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
-    biasCheck = row.select_one('.views-field-field-bias-image a')['href']
-    biasCheck = biasCheck.split('/')[-1]
-    agreeRating = row.select_one('.agree').text
-    agreeRating = int(agreeRating)
-    disagreeRating = row.select_one('.disagree').text
-    disagreeRating = int(disagreeRating)
-    ratio = agreeRating / disagreeRating
+    d = dict()
+
+    d['newsName'] = row.select_one('.source-title').text.strip()
+    d['linkToNewsInfo'] = row.select_one('.source-title a')['href']
+    d['linkToNewsInfo'] = 'https://www.allsides.com' + linkToNewsInfo
+    d['biasCheck'] = row.select_one('.views-field-field-bias-image a')['href']
+    d['biasCheck'] = biasCheck.split('/')[-1]
+    d['agreeRating'] = row.select_one('.agree').text
+    d['agreeRating'] = int(agreeRating)
+    d['disagreeRating'] = row.select_one('.disagree').text
+    d['disagreeRating'] = int(disagreeRating)
+    d['ratio'] = agreeRating / disagreeRating
+
+    fullTable.append(d)
+    print(fullTable[0])
