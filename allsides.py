@@ -65,7 +65,7 @@ ratio = agreeRating / disagreeRating
 # the "somewhat agrees string" was rendered with javascript
 # print("Majority of the community: " + communityVote(ratio))
 
-fullTable = []
+table = []
 
 for row in table:
 
@@ -82,5 +82,5 @@ for row in table:
     d['disagreeRating'] = int(disagreeRating)
     d['ratio'] = agreeRating / disagreeRating
 
-    fullTable.append(d)
+    table.append(d)
     print(fullTable[0])
