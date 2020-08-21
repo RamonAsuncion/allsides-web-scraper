@@ -10,7 +10,7 @@ url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 # get the source code
 source = requests.get(url)
 
-#
+
 soup = BeautifulSoup(source.content, 'lxml')
 
 # first 50 characters of the source code to test
@@ -33,7 +33,7 @@ linkToNewsInfo = row.select_one('.source-title a')['href']
 linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 
 # prints out the link to the news source information section
-# print(linkToNewsInfo)
+print(linkToNewsInfo)
 
 biasCheck = row.select_one('.views-field-field-bias-image a')['href']
 
@@ -65,23 +65,22 @@ print(
 # the "somewhat agrees string" was rendered with javascript
 print("Majority of the community: " + communityVote(ratio))
 
-table = []
 
-for i in table:
+fullTable = []
+
+for row in table:
 
     d = dict()
 
     d['newsName'] = row.select_one('.source-title').text.strip()
-    d['linkToNewsInfo'] = row.select_one('.source-title a')['href']
-    d['linkToNewsInfo'] = 'https://www.allsides.com' + linkToNewsInfo
-    d['biasCheck'] = row.select_one('.views-field-field-bias-image a')['href']
-    d['biasCheck'] = biasCheck.split('/')[-1]
-    d['agreeRating'] = row.select_one('.agree').text
-    d['agreeRating'] = int(agreeRating)
-    d['disagreeRating'] = row.select_one('.disagree').text
-    d['disagreeRating'] = int(disagreeRating)
-    d['ratio'] = d['agreeRating'] / ['disagreeRating']
-    d['communityFeedback'] = communityVote(d['ratio'])
+    d['linkToNewsInfo'] = 'https://www.allsides.com' + \
+        row.select_one('.source-title a')['href']
+    d['bias'] = row.select_one(
+        '.views-field-field-bias-image a')['href'].split('/')[-1]
+    d['agreeRating'] = int(row.select_one('.agree').text)
+    d['disagreeRating'] = int(row.select_one('.disagree').text)
+    d['ratio'] = d['agreeRating'] / d['disagreeRating']
+    d['majorityCommunity'] = communityVote(d['ratio'])
 
-    table.append(d)
-    print(table[0])
+    fullTable.append(d)
+    print(fullTable[1])
