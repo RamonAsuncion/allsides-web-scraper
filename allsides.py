@@ -33,7 +33,7 @@ linkToNewsInfo = row.select_one('.source-title a')['href']
 linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
 
 # prints out the link to the news source information section
-print(linkToNewsInfo)
+# print(linkToNewsInfo)
 
 biasCheck = row.select_one('.views-field-field-bias-image a')['href']
 
@@ -70,17 +70,17 @@ fullTable = []
 
 for row in table:
 
-    d = dict()
+    f = dict()
 
-    d['newsName'] = row.select_one('.source-title').text.strip()
-    d['linkToNewsInfo'] = 'https://www.allsides.com' + \
+    f['newsName'] = row.select_one('.source-title').text.strip()
+    f['linkToNewsInfo'] = 'https://www.allsides.com' + \
         row.select_one('.source-title a')['href']
-    d['bias'] = row.select_one(
+    f['bias'] = row.select_one(
         '.views-field-field-bias-image a')['href'].split('/')[-1]
-    d['agreeRating'] = int(row.select_one('.agree').text)
-    d['disagreeRating'] = int(row.select_one('.disagree').text)
-    d['ratio'] = d['agreeRating'] / d['disagreeRating']
-    d['majorityCommunity'] = communityVote(d['ratio'])
+    f['agreeRating'] = int(row.select_one('.agree').text)
+    f['disagreeRating'] = int(row.select_one('.disagree').text)
+    f['ratio'] = f['agreeRating'] / f['disagreeRating']
+    f['majorityCommunity'] = communityVote(f['ratio'])
 
-    fullTable.append(d)
+    fullTable.append(f)
     print(fullTable[-1])
