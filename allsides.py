@@ -83,4 +83,4 @@ for row in table:
     d['majorityCommunity'] = communityVote(d['ratio'])
 
     fullTable.append(d)
-    print(fullTable[1])
+    print(fullTable[-1])
