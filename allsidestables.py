@@ -21,9 +21,9 @@ for row in table:
         row.select_one('.source-title a')['href']
     f['bias'] = row.select_one(
         '.views-field-field-bias-image a')['href'].split('/')[-1]
-    f['agreeRating'] = int(row.select_one('.agree').text)
-    f['disagreeRating'] = int(row.select_one('.disagree').text)
-    f['ratio'] = f['agreeRating'] / f['disagreeRating']
+    f['agree'] = int(row.select_one('.agree').text)
+    f['disagree'] = int(row.select_one('.disagree').text)
+    f['ratio'] = f['agree'] / f['disagree']
     f['majorityCommunity'] = communityVote(f['ratio'])
 
     fullTable.append(f)
