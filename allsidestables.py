@@ -28,7 +28,7 @@ for row in table:
 
     fullTable.append(f)
 
-    print(fullTable[-1])
+print(fullTable[0])
 
 sleep(10)
 
