@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from communityFeedback import *
 from time import sleep
+import csv
 
 url = 'https://www.allsides.com/media-bias/media-bias-ratings'
 source = requests.get(url)
@@ -28,3 +29,15 @@ for row in table:
     fullTable.append(f)
 
     print(fullTable[-1])
+
+sleep(10)
+
+
+# csv_file = "allsides.csv"
+
+# with open(csv_file, 'w', newline='') as csvFile:
+#     colums = ['newsName', 'linkToNewsInfo', 'bias', 'agreeRating',
+#               'disagreeRating', 'ratio', 'majorityCommunity']
+#     csvWriter = csv.DictReader(csvFile, fieldnames=colums)
+#     csvWriter.writeheader()
+#     csvWriter.writerow(f)
