@@ -15,7 +15,6 @@ for url in pages:
     source = requests.get(url)
     soup = BeautifulSoup(source.content, 'lxml')
     table = soup.select('tbody tr')
-    row = table[0]
 
 
     for row in table:
@@ -34,7 +33,7 @@ for url in pages:
 
         fullTable.append(f)
 
-print(fullTable[1])
+print(fullTable[0])
 
 sleep(10) # this is due to the ten seconds before request in robots.txt
 
