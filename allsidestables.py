@@ -28,16 +28,8 @@ for row in table:
 
     fullTable.append(f)
 
-print(fullTable[0])
+print(fullTable[1])
 
 sleep(10)
 
 
-# csv_file = "allsides.csv"
-
-# with open(csv_file, 'w', newline='') as csvFile:
-#     colums = ['newsName', 'linkToNewsInfo', 'bias', 'agreeRating',
-#               'disagreeRating', 'ratio', 'majorityCommunity']
-#     csvWriter = csv.DictReader(csvFile, fieldnames=colums)
-#     csvWriter.writeheader()
-#     csvWriter.writerow(f)
