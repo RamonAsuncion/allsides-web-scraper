@@ -4,11 +4,14 @@ from communityFeedback import *
 from time import sleep
 import csv
 
-fullTable = []
+fullTable = []  # empty list
 
-pages = {
-    'https://www.allsides.com/media-bias/media-bias-ratings'
-}
+
+pages = [
+    'https://www.allsides.com/media-bias/media-bias-ratings',
+    # found in source code line #2787 for ?page=1
+    'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
+]
 
 for url in pages:
 
@@ -30,8 +33,8 @@ for url in pages:
         f['ratio'] = (f['agree'] / f['disagree'])
         f['Community feedback'] = communityVote(f['ratio'])
 
-        fullTable.append(f)
+        fullTable.append(f)  # adds it to the empty list
 
-print(fullTable[0])
+print(fullTable[30])  # prints out the specific row
 
 sleep(10)  # this is due to the ten seconds before request in robots.txt
