@@ -4,8 +4,6 @@ from communityFeedback import *
 from time import sleep
 from rich.progress import track
 
-fullTable = []  # empty list
-
 pages = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
     # found in html source code line #2787 for ?page=1
@@ -13,11 +11,18 @@ pages = [
 ]
 
 
+def main(fullTable):
+    fullTable = []  # empty list
+
+    return fullTable
+
+
 def table(fullTable):
     for url in pages:
 
         source = requests.get(url)
         soup = BeautifulSoup(source.content, 'lxml')
+
         table = soup.select('tbody tr')
 
         for row in table:
@@ -37,10 +42,8 @@ def table(fullTable):
 
             fullTable.append(0)  # adds it to the empty list
         sleep(10)  # this is due to the ten seconds before request in robots.txt
+        print("Ten seconds have passed; you can send another request.")
     return fullTable
-
-
-print("Ten seconds have passed; you can send another request.")
 
 
 def website(fullTable):
