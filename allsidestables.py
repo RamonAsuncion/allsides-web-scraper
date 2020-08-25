@@ -6,7 +6,6 @@ import csv
 
 fullTable = []  # empty list
 
-
 pages = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
     # found in source code line #2787 for ?page=1
@@ -32,6 +31,9 @@ for url in pages:
         f['disagree'] = int(row.select_one('.disagree').text)
         f['ratio'] = (f['agree'] / f['disagree'])
         f['Community feedback'] = communityVote(f['ratio'])
+        f['ratio'] = "{:.3f}".format(f['ratio'])
+
+        # f['News Source Site'] =
 
         fullTable.append(f)  # adds it to the empty list
 
