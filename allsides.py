@@ -1,66 +1,49 @@
-from communityFeedback import *
 from bs4 import BeautifulSoup
 import requests
+from communityFeedback import *
+from time import sleep
+from rich.progress import track
 
-# imports the functions from the py file to this one
+fullTable = []  # empty list
 
-# url of the website url
-url = 'https://www.allsides.com/media-bias/media-bias-ratings'
+pages = [
+    'https://www.allsides.com/media-bias/media-bias-ratings',
+    # found in html source code line #2787 for ?page=1
+    'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
+]
 
-# get the source code
-source = requests.get(url)
+for url in pages:
+    source = requests.get(url)
+    soup = BeautifulSoup(source.content, 'lxml')
+
+    table = soup.select('tbody tr')
+
+    for row in table:
+
+        f = dict()
+
+        f['News Source'] = row.select_one('.source-title').text.strip()
+        f['AllSides Bias Rating'] = row.select_one(
+            '.views-field-field-bias-image a')['href'].split('/')[-1]
+        f['linkToNewsInfo'] = 'https://www.allsides.com' + \
+            row.select_one('.source-title a')['href']
+        f['agree'] = int(row.select_one('.agree').text)
+        f['disagree'] = int(row.select_one('.disagree').text)
+        f['ratio'] = (f['agree'] / f['disagree'])
+        f['Community feedback'] = communityVote(f['ratio'])
+        f['ratio'] = "{:.3f}".format(f['ratio'])
+
+        fullTable.append(0)  # adds it to the empty list
+    sleep(10)  # this is due to the ten seconds before request in robots.txt
+print("Ten seconds have passed; you can send another request.")
 
 
-soup = BeautifulSoup(source.content, 'lxml')
+# Not all of them have website links
+for d in track(range(100), description="Parsing..."):
+    r = requests.get(f['AllSides Bias Rating'])
+    soup = BeautifulSoup(source.content, 'lxml')
 
-# first 50 characters of the source code to test
-print(source.content[:50])
-
-# Contains News source name, community feedback, link to news source, and bias data.
-table = soup.select('tbody tr')
-
-# selects the first row can go 0 to 29
-row = table[0]
-
-# selects the news name of the row its targeting
-newsName = row.select_one('.source-title').text.strip()
-
-# prints out the news source name
-print(newsName)
-
-linkToNewsInfo = row.select_one('.source-title a')['href']
-
-linkToNewsInfo = 'https://www.allsides.com' + linkToNewsInfo
-
-# prints out the link to the news source information section
-print(linkToNewsInfo)
-
-biasCheck = row.select_one('.views-field-field-bias-image a')['href']
-
-# splits whats to the left of the /
-biasCheck = biasCheck.split('/')[-1]
-
-# prints out if the source is left, left-center, right, right center, center...
-print(biasCheck)
-
-# selects the value for how many agree that their political side is correct
-agreeRating = row.select_one('.agree').text
-
-# turns the string to an integer
-agreeRating = int(agreeRating)
-
-# selects the value for how many disagree that their political side is correct
-disagreeRating = row.select_one('.disagree').text
-
-# turns the string to an integer
-disagreeRating = int(disagreeRating)
-
-# finds the ratio by dividing both of them by eachother
-ratio = agreeRating / disagreeRating
-
-# prints out the rating in print f format
-print(
-    f'Agree: {agreeRating:} Disagree: {disagreeRating:} Ratio (Agree/Disagree): {ratio:.3f}')
-
-# the "somewhat agrees string" was rendered with javascript
-print("Majority of the community: " + communityVote(ratio))
+    try:
+        ['News Source Site']
+    except TypeError:
+        pass
