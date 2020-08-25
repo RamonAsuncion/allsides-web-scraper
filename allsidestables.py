@@ -40,7 +40,7 @@ def table(fullTable):
             f['Community feedback'] = communityVote(f['ratio'])
             f['ratio'] = "{:.3f}".format(f['ratio'])
 
-            fullTable.append(0)  # adds it to the empty list
+            fullTable.append(f)  # adds it to the empty list
         sleep(10)  # this is due to the ten seconds before request in robots.txt
         print("Ten seconds have passed; you can send another request.")
     return fullTable
