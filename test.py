@@ -10,27 +10,31 @@ soup = BeautifulSoup(source.content, 'lxml')
 
 table = soup.select('tbody tr')
 
-fullTable = []  # empty list
 
-for row in table:
-    f = dict()
-    f['linkToNewsInfo'] = 'https://www.allsides.com' + \
-        row.select_one('.source-title a')['href']
+website = soup.select_one('.dynamic-grid:has(a)')
+print(website)
 
-    fullTable.append(f)
+# fullTable = []  # empty list
 
-sleep(10)
-print("continue on testing 10 seconds have passed")
+# for row in table:
+#     f = dict()
+#     f['linkToNewsInfo'] = 'https://www.allsides.com' + \
+#         row.select_one('.source-title a')['href']
 
-for d in track(range(100), description="Parsing..."):
-    r = requests.get(f['linkToNewsInfo'])
-    soup = BeautifulSoup(source.content, 'lxml')
+#     fullTable.append(f)
 
-    try:
-        websiteLink = website = soup.select_one('a')['href']
-        f['News Source Site'] = websiteLink
-    except TypeError:
-        pass
-fullTable.append(f)
+# sleep(10)
+# print("continue on testing 10 seconds have passed")
 
-print(fullTable[0])
+# for d in track(range(100), description="Parsing..."):
+#     r = requests.get(f['linkToNewsInfo'])
+#     soup = BeautifulSoup(source.content, 'lxml')
+
+#     try:
+#         websiteLink = website = soup.select_one('a')['href']
+#         f['News Source Site'] = websiteLink
+#     except TypeError:
+#         pass
+# fullTable.append(f)
+
+# print(fullTable[0])
