@@ -33,17 +33,19 @@ for url in pages:
         f['Community feedback'] = communityVote(f['ratio'])
         f['ratio'] = "{:.3f}".format(f['ratio'])
 
-        fullTable.append(0)  # adds it to the empty list
-    sleep(10)  # this is due to the ten seconds before request in robots.txt
-print("Ten seconds have passed; you can send another request.")
+        fullTable.append(f)  # adds it to the empty list
 
+    sleep(10)  # this is due to the ten seconds before request in robots.txt
 
 # Not all of them have website links
 for d in track(range(100), description="Parsing..."):
-    r = requests.get(f['AllSides Bias Rating'])
+    r = requests.get(f['linkToNewsInfo'])
     soup = BeautifulSoup(source.content, 'lxml')
 
     try:
-        ['News Source Site']
+        websiteLink = website = soup.select_one('a')['href']
+        f['News Source Site'] = websiteLink
     except TypeError:
         pass
+
+    sleep(10)
