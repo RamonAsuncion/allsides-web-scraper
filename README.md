@@ -10,6 +10,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install what is
 pip install requests
 pip install beautifulsoup4
 pip install lxml
+pip install rich
 ```
 
 ## Contributing
