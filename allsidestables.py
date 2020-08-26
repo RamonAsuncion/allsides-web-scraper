@@ -11,13 +11,9 @@ pages = [
 ]
 
 
-def main(fullTable):
-    fullTable = []  # empty list
-
-    return fullTable
-
-
 def table(fullTable):
+    print("table")
+
     for url in pages:
 
         source = requests.get(url)
@@ -42,7 +38,8 @@ def table(fullTable):
 
             fullTable.append(f)  # adds it to the empty list
         sleep(10)  # this is due to the ten seconds before request in robots.txt
-        print("Ten seconds have passed; you can send another request.")
+        print(fullTable[0])
+
     return fullTable
 
 
@@ -58,3 +55,11 @@ def website(fullTable):
             pass
 
     return fullTable
+
+
+def main():
+    fullTable = []  # empty list
+    fullTable = table(fullTable)
+    fullTable = website(fullTable)
+
+    print('Parsing has finished!')
