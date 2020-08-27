@@ -18,6 +18,9 @@ pip install rich
 This project will not be worked on anymore once I have parsed all the data I needed.
 However, I will still look at pull requests.
 
+## Usage
+python allsides.py
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
