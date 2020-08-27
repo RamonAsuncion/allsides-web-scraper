@@ -36,16 +36,15 @@ for url in pages:
         fullTable.append(f)  # adds it to the empty list
 
     sleep(10)  # this is due to the ten seconds before request in robots.txt
-
+print("10")
 # Not all of them have website links
 for d in track(range(100), description="Parsing..."):
     r = requests.get(f['linkToNewsInfo'])
     soup = BeautifulSoup(source.content, 'lxml')
 
     try:
-        websiteLink = website = soup.select_one('a')['href']
+        websiteLink = soup.select(
+            'body > div.full-news-source > div > div > div.span4 > div > ul > li:nth-child(1)')
         f['News Source Site'] = websiteLink
     except TypeError:
         pass
-
-    sleep(10)
