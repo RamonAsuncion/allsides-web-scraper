@@ -11,8 +11,17 @@ soup = BeautifulSoup(source.content, 'lxml')
 table = soup.select('tbody tr')
 
 
-website = soup.select_one('.dynamic-grid:has(a)')
+website = soup.select(
+    'body > div.full-news-source > div > div > div.span4 > div > ul > li:nth-child(1)')
 print(website)
+
+website = soup.select(
+
+print(website)
+
+
+# <a href="http://abcnews.go.com/" target="_blank" alt="ABC News (Online)" title="ABC News (Online)" rel="noopener">
+
 
 # fullTable = []  # empty list
 
