@@ -25,21 +25,21 @@ for url in pages:
         f['News Source'] = row.select_one('.source-title').text.strip()
         f['AllSides Bias Rating'] = row.select_one(
             '.views-field-field-bias-image a')['href'].split('/')[-1]
-        f['linkToNewsInfo'] = 'https://www.allsides.com' + \
+        f['News Media Info'] = 'https://www.allsides.com' + \
             row.select_one('.source-title a')['href']
-        f['agree'] = int(row.select_one('.agree').text)
-        f['disagree'] = int(row.select_one('.disagree').text)
-        f['ratio'] = (f['agree'] / f['disagree'])
-        f['Community feedback'] = communityVote(f['ratio'])
-        f['ratio'] = "{:.3f}".format(f['ratio'])
+        f['Agree'] = int(row.select_one('.agree').text)
+        f['Disagree'] = int(row.select_one('.disagree').text)
+        f['Ratio'] = (f['Agree'] / f['Disagree'])
+        f['Community feedback'] = communityVote(f['Ratio'])
+        f['Ratio'] = "{:.3f}".format(f['Ratio'])
 
         fullTable.append(f)  # adds it to the empty list
-
+    print(fullTable[0])
     sleep(10)  # this is due to the ten seconds before request in robots.txt
 print("10")
 # Not all of them have website links
-for d in track(range(100), description="Parsing..."):
-    r = requests.get(f['linkToNewsInfo'])
+for i in track(range(100), description="Parsing..."):
+    r = requests.get(f['News Media Info'])
     soup = BeautifulSoup(source.content, 'lxml')
 
     try:
