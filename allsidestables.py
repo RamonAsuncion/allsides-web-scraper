@@ -4,14 +4,6 @@ from communityFeedback import *
 from time import sleep
 from rich.progress import track
 
-pages = [
-    'https://www.allsides.com/media-bias/media-bias-ratings',
-    # found in html source code line #2787 for ?page=1
-    'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
-]
-
-
-fullTable = []  # empty list
 
 pages = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
@@ -82,3 +74,7 @@ def main():
     fullTable = website(fullTable)
 
     print('Parsing has finished!')
+
+
+if __name__ == '__main__':
+    main()
