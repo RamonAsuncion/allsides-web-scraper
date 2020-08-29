@@ -45,14 +45,14 @@ for i in track(range(100), description="Parsing..."):
         # getting the website link to news source
         website = soup.find('div', {'class': 'dynamic-grid'})
         link = website.find('a')['href']
-        f['News Source Site'] = website
+        f['News Source Site'] = link
     except TypeError:
         pass
 
     try:
         # getting the creation date of the news source
         website = soup.find('div', {'class': 'dynamic-grid'})
-        link = website.find_all('p')[1].text
-        print(link)
+        paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
+        f['Established:'] = paragraphTag
     except TypeError:
         pass

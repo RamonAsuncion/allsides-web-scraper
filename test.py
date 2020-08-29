@@ -10,7 +10,7 @@ soup = BeautifulSoup(source.content, 'lxml')
 
 
 website = soup.find('div', {'class': 'dynamic-grid'})
-link = website.find_all('p')[1].text
+link = website.find_all('p')[1].text.split('.')[-1].strip()
 print(link)
 
 # table = soup.select('tbody tr')
