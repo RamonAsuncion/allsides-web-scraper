@@ -63,6 +63,7 @@ def website(fullTable):
             f['Established:'] = paragraphTag
         except IndexError:
             pass
+        sleep(10)
     return fullTable
 
 
