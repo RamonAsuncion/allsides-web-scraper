@@ -34,17 +34,16 @@ for url in pages:
         f['Ratio'] = "{:.3f}".format(f['Ratio'])
 
         fullTable.append(f)  # adds it to the empty list
-    print(fullTable[0])
     sleep(10)  # this is due to the ten seconds before request in robots.txt
 print("10")
 # Not all of them have website links
 for i in track(range(100), description="Parsing..."):
-    r = requests.get(f['News Media Info'])
+    source = requests.get(f['News Media Info'])
     soup = BeautifulSoup(source.content, 'lxml')
 
     try:
-        websiteLink = soup.select(
-            'body > div.full-news-source > div > div > div.span4 > div > ul > li:nth-child(1)')
-        f['News Source Site'] = websiteLink
+        website = soup.find('div', {'class': 'dynamic-grid'})
+        link = website.find('a')['href']
+        f['News Source Site'] = website
     except TypeError:
         pass

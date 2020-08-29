@@ -46,7 +46,7 @@ def table(fullTable):
 def website(fullTable):
     # Not all of them have website links
     for f in track(range(100), description="Parsing..."):
-        r = requests.get(f['AllSides Bias Rating'])
+        source = requests.get(f['AllSides Bias Rating'])
         soup = BeautifulSoup(source.content, 'lxml')
 
         try:
