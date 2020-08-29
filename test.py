@@ -18,8 +18,9 @@ table = soup.select('tbody tr')
 # website = soup.select('div.span4 > div > ul > li:nth-child(1)')
 # print(website)
 
-for website in soup.find_all('a', href=True):
-    print(website['href'])
+website = soup.find('div', {'class': 'dynamic-grid'})
+link = website.find('a')['href']
+print(link)
 
 sleep(10)
 print("10 seconds have passed")
