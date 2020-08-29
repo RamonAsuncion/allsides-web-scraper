@@ -45,7 +45,7 @@ def table(fullTable):
 
 def website(fullTable):
     # Not all of them have website links
-    for i in track(range(100), description="Parsing..."):
+    for f in track(range(100), description="Parsing..."):
         source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
 
@@ -69,10 +69,18 @@ def website(fullTable):
     return fullTable
 
 
+def savingData(fullTable):
+    with open('allside.csv', 'w', newline="") as i:
+        write = csv.writer(i)
+        write.writerow(fullTable)
+    return
+
+
 def main():
     fullTable = []  # empty list
     fullTable = table(fullTable)
     fullTable = website(fullTable)
+    savingData(fullTable)
 
     print('Parsing has finished!')
 
