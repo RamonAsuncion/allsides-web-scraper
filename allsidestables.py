@@ -11,11 +11,18 @@ pages = [
 ]
 
 
+fullTable = []  # empty list
+
+pages = [
+    'https://www.allsides.com/media-bias/media-bias-ratings',
+    # found in html source code line #2787 for ?page=1
+    'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
+]
+
+
 def table(fullTable):
-    print("table")
-
+    print('Webscrapper is scrapping the table!')
     for url in pages:
-
         source = requests.get(url)
         soup = BeautifulSoup(source.content, 'lxml')
 
@@ -37,25 +44,36 @@ def table(fullTable):
             f['Ratio'] = "{:.3f}".format(f['Ratio'])
 
             fullTable.append(f)  # adds it to the empty list
+
         sleep(10)  # this is due to the ten seconds before request in robots.txt
-        print(fullTable[0])
-
     return fullTable
+    print("10")
 
 
-def website(fullTable):
+def website():
     # Not all of them have website links
-    for f in track(range(100), description="Parsing..."):
-        source = requests.get(f['AllSides Bias Rating'])
+    for i in track(range(100), description="Parsing..."):
+        source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
 
         try:
-            ['News Source Site']
+            # getting the website link to news source
+            website = soup.find('div', {'class': 'dynamic-grid'})
+            link = website.find('a')['href']
+            f['News Source Site'] = link
         except TypeError:
             pass
 
+        try:
+            # getting the creation date of the news source
+            website = soup.find('div', {'class': 'dynamic-grid'})
+            paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
+            f['Established:'] = paragraphTag
+        except TypeError:
+            pass
+
+        sleep(10)
     return fullTable
-    sleep(10)
 
 
 def main():
