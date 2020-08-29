@@ -15,7 +15,7 @@ pip install rich
 
 ## Working On
 
-Goal is to get the website link and the date it was founded
+Goal: making the csv file organized
 
 ## Contributing
 
