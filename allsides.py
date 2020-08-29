@@ -42,8 +42,17 @@ for i in track(range(100), description="Parsing..."):
     soup = BeautifulSoup(source.content, 'lxml')
 
     try:
+        # getting the website link to news source
         website = soup.find('div', {'class': 'dynamic-grid'})
         link = website.find('a')['href']
         f['News Source Site'] = website
+    except TypeError:
+        pass
+
+    try:
+        # getting the creation date of the news source
+        website = soup.find('div', {'class': 'dynamic-grid'})
+        link = website.find_all('p')[1].text
+        print(link)
     except TypeError:
         pass

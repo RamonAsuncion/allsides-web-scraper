@@ -10,7 +10,7 @@ soup = BeautifulSoup(source.content, 'lxml')
 
 
 website = soup.find('div', {'class': 'dynamic-grid'})
-link = website.find('a')['href']
+link = website.find_all('p')[1].text
 print(link)
 
 # table = soup.select('tbody tr')
