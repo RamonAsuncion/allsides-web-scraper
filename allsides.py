@@ -45,7 +45,7 @@ def table(fullTable):
 
 def website(fullTable):
     # Not all of them have website links
-    for f in track(range(100), description="Parsing..."):
+    for f in track(fullTable, description="Parsing..."):
         source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
 
@@ -56,16 +56,13 @@ def website(fullTable):
             f['News Source Site'] = link
         except TypeError:
             pass
-
         try:
             # getting the creation date of the news source
             website = soup.find('div', {'class': 'dynamic-grid'})
             paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
             f['Established:'] = paragraphTag
-        except TypeError:
+        except IndexError:
             pass
-
-        sleep(10)
     return fullTable
 
 
@@ -73,7 +70,6 @@ def savingData(fullTable):
     with open('allside.csv', 'w', newline="") as i:
         write = csv.writer(i)
         write.writerow(fullTable)
-    return
 
 
 def main():
