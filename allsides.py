@@ -6,9 +6,8 @@ from rich.progress import track
 import csv
 
 
-pages = [
+pages = [  # Max 2 pages (testing for more)
     'https://www.allsides.com/media-bias/media-bias-ratings',
-    # found in html source code line #2787 for ?page=1
     'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
 ]
 
@@ -61,6 +60,12 @@ def website(fullTable):
             website = soup.find('div', {'class': 'dynamic-grid'})
             paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
             f['Established:'] = paragraphTag
+        except IndexError:
+            pass
+        try:
+            website = soup.find('div', {'class': 'dynamic-grid'})
+            paragraphTag = website.find_all('p')[2].text.split(':')[-1].strip()
+            f['Owned by:'] = paragraphTag
         except IndexError:
             pass
         sleep(10)
