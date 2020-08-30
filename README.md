@@ -13,10 +13,6 @@ pip install lxml
 pip install rich
 ```
 
-## Working On
-
-Goal: making the csv file organized
-
 ## Contributing
 
 This project will not be worked on anymore once I have parsed all the data I needed.
