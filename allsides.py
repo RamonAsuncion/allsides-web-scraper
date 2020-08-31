@@ -3,10 +3,10 @@ import requests
 from communityFeedback import *
 from time import sleep
 from rich.progress import track
-import csv
+import json
 
 
-pages = [  # Max 2 pages (testing for more)
+pages = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
     'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
 ]
@@ -73,9 +73,8 @@ def website(fullTable):
 
 
 def savingData(fullTable):
-    with open('allside.csv', 'w', newline="") as i:
-        write = csv.writer(i)
-        write.writerow(fullTable)
+    with open('allside.json', 'w', newline="") as i:
+        json.dump(fullTable, i)
 
 
 def main():
