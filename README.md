@@ -22,6 +22,8 @@ However, I will still look at pull requests.
 
 python allsides.py
 
+The output will be in a allside.csv file. 
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
