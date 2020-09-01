@@ -13,6 +13,7 @@ pages = [
 
 
 def table(fullTable):
+    # The main table
     print('Webscrapper is scrapping the table!')
     for url in pages:
         source = requests.get(url)
@@ -22,7 +23,7 @@ def table(fullTable):
 
         for row in table:
 
-            f = dict()
+            f = dict()  # dictionary
 
             f['News Source'] = row.select_one('.source-title').text.strip()
             f['AllSides Bias Rating'] = row.select_one(
@@ -39,11 +40,10 @@ def table(fullTable):
 
         sleep(10)  # this is due to the ten seconds before request in robots.txt
     return fullTable
-    print("10")
 
 
 def website(fullTable):
-    # Not all of them have website links
+    # Enters into the info page and parses out the info
     for f in track(fullTable, description="Parsing..."):
         source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
@@ -63,6 +63,7 @@ def website(fullTable):
         except IndexError:
             pass
         try:
+            # Who the news source owned by
             website = soup.find('div', {'class': 'dynamic-grid'})
             paragraphTag = website.find_all('p')[2].text.split(':')[-1].strip()
             f['Owned by:'] = paragraphTag
@@ -73,11 +74,13 @@ def website(fullTable):
 
 
 def savingData(fullTable):
+    # Saves the data into a json file with no lines
     with open('allside.json', 'w', newline="") as i:
         json.dump(fullTable, i)
 
 
 def main():
+    # main function
     fullTable = []  # empty list
     fullTable = table(fullTable)
     fullTable = website(fullTable)
