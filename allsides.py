@@ -8,7 +8,6 @@ import json
 
 pages = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
-    'https://www.allsides.com/media-bias/media-bias-ratings?page=1',
 ]
 
 
