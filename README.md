@@ -27,8 +27,13 @@ python allsides.py
 The output will be in a allside.json file.
 
 Find the script's directory, mine was located in: Desktop\Allsides Webscraper and run the script.
-![GIF](http://recordit.co/LlJ5jP5Pqw)
+![GIF](http://g.recordit.co/LlJ5jP5Pqw.gif)
 
+## Example 
+##### ABC News
+```json
+[{"News Source": "ABC News (Online)", "AllSides Bias Rating": "left-center", "News Media Info": "https://www.allsides.com/news-source/abc-news-media-bias", "Agree": 23795, "Disagree": 13522, "Ratio": "1.760", "Community feedback": "Agree", "News Source Site": "http://abcnews.go.com/", "Established:": "6/15/1945", "Owned by:": "The Walt Disney Company"}]
+```
 
 ## License
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://mit-license.org)
