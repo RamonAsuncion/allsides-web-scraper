@@ -27,7 +27,7 @@ python allsides.py
 The output will be in a allside.json file.
 
 Find the script's directory, mine was located in: Desktop\Allsides Webscraper and run the script.
-![GIF](http://g.recordit.co/rbFjDJdt7q.gif)
+![GIF](http://recordit.co/LlJ5jP5Pqw)
 
 
 ## License
