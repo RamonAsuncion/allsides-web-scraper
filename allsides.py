@@ -59,14 +59,14 @@ def website(fullTable):
             # getting the creation date of the news source
             website = soup.find('div', {'class': 'dynamic-grid'})
             paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
-            f['Established:'] = paragraphTag
+            f['Established'] = paragraphTag
         except IndexError:
             pass
         try:
             # Who the news source owned by
             website = soup.find('div', {'class': 'dynamic-grid'})
             paragraphTag = website.find_all('p')[2].text.split(':')[-1].strip()
-            f['Owned by:'] = paragraphTag
+            f['Owned by'] = paragraphTag
         except IndexError:
             pass
         sleep(10)
