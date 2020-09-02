@@ -32,7 +32,7 @@ Find the script's directory, mine was located in: Desktop\Allsides Webscraper an
 ## Example 
 ##### ABC News
 ```json
-[{"News Source": "ABC News (Online)", "AllSides Bias Rating": "left-center", "News Media Info": "https://www.allsides.com/news-source/abc-news-media-bias", "Agree": 23795, "Disagree": 13522, "Ratio": "1.760", "Community feedback": "Agree", "News Source Site": "http://abcnews.go.com/", "Established:": "6/15/1945", "Owned by:": "The Walt Disney Company"}]
+[{"News Source": "ABC News (Online)", "AllSides Bias Rating": "left-center", "News Media Info": "https://www.allsides.com/news-source/abc-news-media-bias", "Agree": 23795, "Disagree": 13522, "Ratio": "1.760", "Community feedback": "Agree", "News Source Site": "http://abcnews.go.com/", "Established": "6/15/1945", "Owned by": "The Walt Disney Company"}]
 ```
 
 ## License
