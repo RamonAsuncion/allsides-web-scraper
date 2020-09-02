@@ -14,7 +14,7 @@ pages = [
 
 def table(fullTable):
     # The main table
-    print('Webscrapper is scrapping the table!')
+    print('Web scraper is parsing the table!')
     for url in pages:
         source = requests.get(url)
         soup = BeautifulSoup(source.content, 'lxml')
