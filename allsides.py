@@ -6,7 +6,7 @@ from rich.progress import track
 import json
 
 
-pages = [
+page = [
     'https://www.allsides.com/media-bias/media-bias-ratings',
 ]
 
@@ -14,7 +14,7 @@ pages = [
 def table(fullTable):
     # The main table
     print('Web scraper is parsing the table!')
-    for url in pages:
+    for url in page:
         source = requests.get(url)
         soup = BeautifulSoup(source.content, 'lxml')
 
@@ -50,31 +50,31 @@ def website(fullTable):
         try:
             # getting the website link to news source
             website = soup.find('div', {'class': 'dynamic-grid'})
-            link = website.find('a')['href']
-            f['News Source Site'] = link
+            linkToNewsSource = website.find('a')['href']
+            f['News Source Site'] = linkToNewsSource
         except TypeError:
             pass
         try:
             # getting the creation date of the news source
             website = soup.find('div', {'class': 'dynamic-grid'})
-            paragraphTag = website.find_all('p')[1].text.split('.')[-1].strip()
-            f['Established'] = paragraphTag
+            paragraph = website.find_all('p')[1].text.split('.')[-1].strip()
+            f['Established'] = paragraph
         except IndexError:
             pass
         try:
             # Who the news source owned by
             website = soup.find('div', {'class': 'dynamic-grid'})
-            paragraphTag = website.find_all('p')[2].text.split(':')[-1].strip()
-            f['Owned by'] = paragraphTag
+            paragraph = website.find_all('p')[2].text.split(':')[-1].strip()
+            f['Owned by'] = paragraph
         except IndexError:
             pass
         sleep(10)
     return fullTable
 
 
-def savingData(fullTable):
+def saving_data(fullTable):
     # Saves the data into a json file with no lines
-    with open('allside.json', 'w', newline="") as i:
+    with open('all-sides.json', 'w', newline="") as i:
         json.dump(fullTable, i)
 
 
@@ -83,7 +83,7 @@ def main():
     fullTable = []  # empty list
     fullTable = table(fullTable)
     fullTable = website(fullTable)
-    savingData(fullTable)
+    saving_data(fullTable)
 
     print('Parsing has finished!')
 
