@@ -38,7 +38,6 @@ def table(full_table):
             full_table.append(f)  # adds it to the empty list
 
         sleep(10)  # this is due to the ten seconds before request in robots.txt
-        print('10')
     return full_table
 
 
