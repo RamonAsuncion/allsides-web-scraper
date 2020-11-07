@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from communityFeedback import *
+from community_feedback import *
 from time import sleep
 from rich.progress import track
 import json
@@ -32,7 +32,7 @@ def table(full_table):
             f['Agree'] = int(row.select_one('.agree').text)
             f['Disagree'] = int(row.select_one('.disagree').text)
             f['Ratio'] = (f['Agree'] / f['Disagree'])
-            f['Community feedback'] = communityVote(f['Ratio'])
+            f['Community feedback'] = community_vote(f['Ratio'])
             f['Ratio'] = "{:.3f}".format(f['Ratio'])
 
             full_table.append(f)  # adds it to the empty list
@@ -53,21 +53,23 @@ def website(full_table):
             locate_paragraph = locate_html_class.find('a')['href']
             f['News Source Site'] = locate_paragraph
         except TypeError:
-            pass
+            f['News Source Site'] = "N/A"
         try:
             # getting the creation date of the news source
             locate__html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_paragraph = locate__html_class.find_all('p')[1].text.split('.')[-1].strip()
+            locate_paragraph = locate__html_class.find_all(
+                'p')[1].text.split('.')[-1].strip()
             f['Established'] = locate_paragraph
         except IndexError:
-            pass
+            f['Established'] = "N/A"
         try:
             # Who the news source owned by
             locate__html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_paragraph = locate__html_class.find_all('p')[2].text.split(':')[-1].strip()
+            locate_paragraph = locate__html_class.find_all(
+                'p')[2].text.split(':')[-1].strip()
             f['Owned by'] = locate_paragraph
         except IndexError:
-            pass
+            f['Owned by'] = "N/A"
         sleep(10)
     return full_table
 
