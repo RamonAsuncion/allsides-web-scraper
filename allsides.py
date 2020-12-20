@@ -1,14 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
-from community_feedback import *
+from communityfeedback import *
 from time import sleep
 from rich.progress import track
 import json
 
 
-page = [
-    'https://www.allsides.com/media-bias/media-bias-ratings',
-]
+page = ['https://www.allsides.com/media-bias/media-bias-ratings']
 
 
 def table(full_table):
