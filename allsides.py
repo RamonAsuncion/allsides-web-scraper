@@ -5,12 +5,12 @@ from time import sleep
 from rich.progress import track
 import json
 
-
+#
 page = ['https://www.allsides.com/media-bias/media-bias-ratings']
 
 
 def table(full_table):
-    # The main table
+    # the main table
     print('Web scraper is parsing the table!')
     for url in page:
         source = requests.get(url)
@@ -20,7 +20,7 @@ def table(full_table):
 
         for row in main_table:
 
-            f = dict()  # dictionary
+            f = dict()
 
             f['News Source'] = row.select_one('.source-title').text.strip()
             f['AllSides Bias Rating'] = row.select_one(
@@ -40,7 +40,7 @@ def table(full_table):
 
 
 def website(full_table):
-    # Enters into the info page and parses out the info
+    # enters into the info page and parses out the info
     for f in track(full_table, description="Parsing..."):
         source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
@@ -48,32 +48,42 @@ def website(full_table):
         try:
             # getting the website link to news source
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_paragraph = locate_html_class.find('a')['href']
-            f['News Source Site'] = locate_paragraph
+            locate_link = locate_html_class.find('a')['href']
+            f['News Source Site'] = locate_link
         except TypeError:
             f['News Source Site'] = "N/A"
         try:
             # getting the creation date of the news source
-            locate__html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_paragraph = locate__html_class.find_all(
-                'p')[1].text.split('.')[-1].strip()
-            f['Established'] = locate_paragraph
-        except IndexError:
+            locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
+            locate_creation_date = locate_html_class.find_all(
+                'p')[1].text.split('.')[-1].strip()  # use to be 1 for the first element
+            f['Established'] = locate_creation_date
+        except TypeError:
             f['Established'] = "N/A"
+        sleep(10)
         try:
-            # Who the news source owned by
-            locate__html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_paragraph = locate__html_class.find_all(
+            # who the news source owned by
+            locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
+            locate_owned_by = locate_html_class.find_all(
                 'p')[2].text.split(':')[-1].strip()
-            f['Owned by'] = locate_paragraph
-        except IndexError:
+            f['Owned by'] = locate_owned_by
+        except TypeError:
             f['Owned by'] = "N/A"
+        try:
+            # What the site covers
+            locate_html_class = soup.find('p', {'class': 'more'})
+            about_paragraph = locate_html_class.find(
+                'p').text.split('"').strip()
+            print(about_paragraph)
+            # f['Info Paragraph'] = about_paragraph
+        except TypeError:
+            f['Info Paragraph'] = "N/A"
         sleep(10)
     return full_table
 
 
 def saving_data(full_table):
-    # Saves the data into a json file with no lines
+    # saves the data into a json file with no lines
     with open('all-sides.json', 'w', newline="") as i:
         json.dump(full_table, i)
 
