@@ -56,27 +56,24 @@ def website(full_table):
             # getting the creation date of the news source
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
             locate_creation_date = locate_html_class.find_all(
-                'p')[1].text.split('.')[-1].strip()  # use to be 1 for the first element
+                'p')[1].text.split('.')[-1].strip()
             f['Established'] = locate_creation_date
-        except TypeError:
+        except IndexError:
             f['Established'] = "N/A"
-        sleep(10)
         try:
             # who the news source owned by
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
             locate_owned_by = locate_html_class.find_all(
                 'p')[2].text.split(':')[-1].strip()
             f['Owned by'] = locate_owned_by
-        except TypeError:
+        except IndexError:
             f['Owned by'] = "N/A"
         try:
-            # What the site covers
+            # What the site covers / about
             locate_html_class = soup.find('p', {'class': 'more'})
-            about_paragraph = locate_html_class.find(
-                'p').text.split('"').strip()
-            print(about_paragraph)
-            # f['Info Paragraph'] = about_paragraph
-        except TypeError:
+            about_paragraph = locate_html_class.get_text().strip()
+            f['Info Paragraph'] = about_paragraph
+        except Exception:
             f['Info Paragraph'] = "N/A"
         sleep(10)
     return full_table
