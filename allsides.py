@@ -5,7 +5,6 @@ from time import sleep
 from rich.progress import track
 import json
 
-#
 page = ['https://www.allsides.com/media-bias/media-bias-ratings']
 
 
@@ -60,6 +59,7 @@ def website(full_table):
             f['Established'] = locate_creation_date
         except IndexError:
             f['Established'] = "N/A"
+        sleep(10)
         try:
             # who the news source owned by
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
@@ -75,6 +75,7 @@ def website(full_table):
             f['Info Paragraph'] = about_paragraph
         except Exception:
             f['Info Paragraph'] = "N/A"
+            # Sleep 10 seconds to follow robots.txt rules https://www.allsides.com/robots.txt
         sleep(10)
     return full_table
 

@@ -17,22 +17,35 @@ pip install rich
 
 ## Contributing
 
-This project will not be worked on anymore once I have parsed all the data I needed.
-However, I will still look at pull requests.
+You are free to open any pull request. 
 
 ## Usage
 
 python allsides.py
 
-The output will be in a allside.json file.
+The output will be in a allside.json file in the same directory.
 
 Find the script's directory, mine was located in: Desktop\Allsides Webscraper and run the script.
 ![GIF](http://g.recordit.co/LlJ5jP5Pqw.gif)
 
 ## Example 
-##### ABC News
+##### ABC News (Online)
 ```json
-[{"News Source": "ABC News (Online)", "AllSides Bias Rating": "left-center", "News Media Info": "https://www.allsides.com/news-source/abc-news-media-bias", "Agree": 23795, "Disagree": 13522, "Ratio": "1.760", "Community feedback": "Agree", "News Source Site": "http://abcnews.go.com/", "Established": "6/15/1945", "Owned by": "The Walt Disney Company"}]
+[
+    {
+        "News Source": "ABC News (Online)",
+        "AllSides Bias Rating": "left-center",
+        "News Media Info": "https://www.allsides.com/news-source/abc-news-media-bias",
+        "Agree": 30121,
+        "Disagree": 15825,
+        "Ratio": "1.903",
+        "Community feedback": "Agree",
+        "News Source Site": "http://abcnews.go.com/",
+        "Established": "6/15/1945",
+        "Owned by": "The Walt Disney Company",
+        "Info Paragraph": "The news division of the American Broadcasting Company (ABC), owned by the Disney Media Networks division of The Walt Disney Company."
+    }
+]
 ```
 
 ## License
