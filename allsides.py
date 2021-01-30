@@ -29,7 +29,7 @@ def table(full_table):
             f['Agree'] = int(row.select_one('.agree').text)
             f['Disagree'] = int(row.select_one('.disagree').text)
             f['Ratio'] = (f['Agree'] / f['Disagree'])
-            f['Community feedback'] = community_vote(f['Ratio'])
+            f['Community Feedback'] = community_vote(f['Ratio'])
             f['Ratio'] = "{:.3f}".format(f['Ratio'])
 
             full_table.append(f)  # adds it to the empty list
@@ -50,7 +50,7 @@ def website(full_table):
             locate_link = locate_html_class.find('a')['href']
             f['News Source Site'] = locate_link
         except TypeError:
-            f['News Source Site'] = "N/A"
+            f['News Source Site'] = 'N/A'
         try:
             # getting the creation date of the news source
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
@@ -58,7 +58,7 @@ def website(full_table):
                 'p')[1].text.split('.')[-1].strip()
             f['Established'] = locate_creation_date
         except IndexError:
-            f['Established'] = "N/A"
+            f['Established'] = 'N/A'
         sleep(10)
         try:
             # who the news source owned by
@@ -67,16 +67,21 @@ def website(full_table):
                 'p')[2].text.split(':')[-1].strip()
             f['Owned by'] = locate_owned_by
         except IndexError:
-            f['Owned by'] = "N/A"
+            f['Owned by'] = 'N/A'
         try:
             # What the site covers / about
             locate_html_class = soup.find('p', {'class': 'more'})
-            about_paragraph = locate_html_class.get_text().strip()
-            f['Info Paragraph'] = about_paragraph
+            locate_about_paragraph = locate_html_class.get_text().strip()
+            f['Info Paragraph'] = locate_about_paragraph
         except Exception:
-            f['Info Paragraph'] = "N/A"
+            f['Info Paragraph'] = 'N/A'
             # Sleep 10 seconds to follow robots.txt rules https://www.allsides.com/robots.txt
         sleep(10)
+        try:
+            locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
+            locate_link = locate_html_class.find('a')['href']
+        except Exception:
+            f['Wikipedia Page'] = 'N/A'
     return full_table
 
 
