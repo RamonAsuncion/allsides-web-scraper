@@ -82,6 +82,8 @@ def website(full_table):
             locate_link = locate_html_class.find('a')['href']
         except Exception:
             f['Wikipedia Page'] = 'N/A'
+
+    print('Parsing has finished')  
     return full_table
 
 
@@ -92,13 +94,11 @@ def saving_data(full_table):
 
 
 def main():
-    # main function
     full_table = []  # empty list
     full_table = table(full_table)
     full_table = website(full_table)
     saving_data(full_table)
 
-    print('Parsing has finished!')
 
 
 if __name__ == '__main__':
