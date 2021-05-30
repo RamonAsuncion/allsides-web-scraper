@@ -51,3 +51,10 @@ Find the script's directory, mine was located in: Desktop\Allsides Webscraper an
 ## License
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://mit-license.org)
 - [MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Credit
+I was inspired by Brendan Martin who made this beautiful guide on introduction to webscraping. 
+https://www.learndatasci.com/tutorials/ultimate-guide-web-scraping-w-python-requests-and-beautifulsoup/
+
+This web scraper has been modified, however, follows similar format to the guide! 
