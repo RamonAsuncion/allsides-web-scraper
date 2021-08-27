@@ -42,46 +42,42 @@ def website(full_table):
     for f in track(full_table, description='Parsing...'):
         source = requests.get(f['News Media Info'])
         soup = BeautifulSoup(source.content, 'lxml')
-
         try:
             # getting the website link to news source
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
             locate_link = locate_html_class.find('a')['href']
             f['News Source Site'] = locate_link
-        except TypeError:
+        except:
             f['News Source Site'] = 'N/A'
         try:
             # getting the creation date of the news source
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_creation_date = locate_html_class.find_all(
-                'p')[1].text.split('.')[-1].strip()
+            locate_creation_date = locate_html_class.find_all('p')[1].text.split('.')[-1].strip()
             f['Established'] = locate_creation_date
-        except IndexError:
+        except:
             f['Established'] = 'N/A'
-        sleep(10)
         try:
             # who the news source owned by
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
-            locate_owned_by = locate_html_class.find_all(
-                'p')[2].text.split(':')[-1].strip()
+            locate_owned_by = locate_html_class.find_all('p')[2].text.split(':')[-1].strip()
             f['Owned by'] = locate_owned_by
-        except IndexError:
+        except:
             f['Owned by'] = 'N/A'
         try:
             # What the site covers / about
             locate_html_class = soup.find('p', {'class': 'more'})
             locate_about_paragraph = locate_html_class.get_text().strip()
             f['Info Paragraph'] = locate_about_paragraph
-        except Exception:
+        except:
             f['Info Paragraph'] = 'N/A'
-            # Sleep 10 seconds to follow robots.txt rules https://www.allsides.com/robots.txt
         sleep(10)
         try:
             locate_html_class = soup.find('div', {'class': 'dynamic-grid'})
             locate_link = locate_html_class.find('a')['href']
-        except Exception:
+        except:
             f['Wikipedia Page'] = 'N/A'
-
+        # Sleep 10 seconds to follow robots.txt rules https://www.allsides.com/robots.txt
+        sleep(10)
     print('Parsing has finished')  
     return full_table
 
