@@ -15,7 +15,7 @@ pip install lxml
 pip install rich
 ```
 
-Alternatively, you can also use the 'requirement.txt' file to install the required packages. 
+Alternatively, you can also use the `requirement.txt` file to install the required packages. 
 ```
 pip install -r requirements.txt
 ```
