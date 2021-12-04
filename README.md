@@ -8,11 +8,16 @@ Allsides Webscraper is a web scraper made in Python to parse data from https://w
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install what is necessary for the web scraper.
 
-```bash
+```
 pip install requests
 pip install beautifulsoup4
 pip install lxml
 pip install rich
+```
+
+Alternatively, you can also use the 'requirement.txt' file to install the required packages. 
+```
+pip install -r requirements.txt
 ```
 
 ## Contributing
