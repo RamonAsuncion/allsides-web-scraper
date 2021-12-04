@@ -6,12 +6,13 @@ from rich.progress import track
 import json
 
 # TODO: Finish progress bar. 
+# TODO: For numbers that are over 10,000 add the comma. 
+# TODO: For Allsides Bias Rating change 'left-center' --> 'Left Center'. 
 
 
 def table(full_table):
-    # the main table
     print('Web scraper is parsing the table!')
-    # only collects data from the first table that shows not the ones that load after the infinite scroll 
+    # only collects data from the first table that shows not the ones that load after the infinite scroll.
     for url in ['https://www.allsides.com/media-bias/media-bias-ratings']:
         source = requests.get(url)
         soup = BeautifulSoup(source.content, 'lxml')

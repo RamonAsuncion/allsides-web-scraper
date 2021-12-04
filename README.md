@@ -59,4 +59,4 @@ Find the script's directory, mine was located in: Desktop\Allsides Webscraper an
 
 
 ## Credit
-I was inspired by Brendan Martin who made this beautiful guide on introduction to webscraping. This web scraper has been modified, however, follows similar format to the guide! 
+I was inspired by Brendan Martin who made this beautiful guide on introduction to web scraping. This web scraper has been modified, however, follows similar format to the guide! 
